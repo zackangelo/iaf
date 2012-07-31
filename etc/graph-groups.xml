@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<graph-groups>
+	<graph-group name="MuLawWavPlayerGroup">
+		<filter-instance>
+			<instance name="Wav1" type="MuLawWavFileSource">
+				<property name="filename" value="res\ding.wav"/>
+				<property name="chunkSize" value="128"/>
+			</instance>
+			<instance name="MuLawDecoder" type="MuLawToPcmDecoder"/>
+			<instance name="Speaker" type="SpeakerSink"/>
+		</filter-instance>
+		
+		<graph name="MuLawWavPlayer">
+			<engine instance="Speaker">
+				<input>
+					<filter instance="MuLawDecoder">
+						<input>
+							<filter name="Wav1"/>
+						</input>
+					</filter>
+				</input>
+			</engine>
+		</graph>
+	</graph-group>
+	
+<!-- RTP Transmitter/Receiver... (not ready for prime time)
+	<graph-group name="RtpRxTx">
+		<filter-instances>
+			<instance name="primaryMicSource" type="MicSource"/>
+			<instance name="primaryRtpSink" type="MuLawRtpSink"/>
+			<instance name="primaryRtpSource" type="MuLawRtpSource"/>
+			<instance name="primaryMuLawEncoder" type="PcmToMuLawEncoder"/>
+			<instance name="primaryMuLawDecoder" type="MuLawToPcmDecoder"/>
+			<instance name="primaryEC" type="EchoCanceller"/>
+		</filter-instances>		
+		
+		<graph name="RtpTx">
+			<engine instance="primaryRtpSink">
+				<input>
+					<filter instance="primaryMuLawEncoder">
+						<input pinName="transmit">
+							<filter instance="primaryEC">
+								<input>
+									<filter instance="primaryMicSource"/>
+								</input>
+							</filter>	
+						</input>
+					</filter>
+				</input>
+			</engine>
+		</graph>	
+		
+		<graph name="RtpRx">
+			<engine instance="primaryRtpSource">
+				<output>
+					<filter instance="primaryMuLawDecoder">		
+						<output pinName="loopback">
+							<filter instance="primaryEC">
+								<output>
+									<filter instance="primarySpeakerSink"/>
+								</output>
+							</filter>
+						</output>
+					</filter>
+				</output>
+			</engine>
+		</graph>
+	</graph-group>
+-->
+</graph-groups>

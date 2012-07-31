@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<filter-definitions package="com.vogistix.iaf.filters">
+	<filter-definition name="PcmToMuLawEncoder" class="PcmToMuLawEncoderFilter" type="transform">
+		<input frequency="8000" sampleSize="2" encoding="pcm"/>
+		<output frequency="8000" sampleSize="1" encoding="mulaw"/>
+	</filter-definition>
+
+	<filter-definition name="MuLawToPcmDecoder" class="MuLawToPcmDecoderFilter" type="transform">
+		<input frequency="8000" sampleSize="1" encoding="mulaw"/>
+		<output frequency="8000" sampleSize="2" encoding="pcm"/>
+	</filter-definition>
+
+<!-- 
+	<filter-definition name="EchoCanceller" class="EchoCancellingFilter" type="transform">
+		<input frequency="8000" sampleSize="2" encoding="pcm" name="transmit"/>
+		<input frequency="8000" sampleSize="2" encoding="pcm" name="loopback"/>
+		<output frequency="8000" sampleSize="2" encoding="pcm"/>
+	</filter-definition> 		
+		
+	<filter-definition name="MicSource" class="MicrophoneSourceFilter" type="source">
+		<output frequency="8000" sampleSize="2" encoding="pcm"/>
+	</filter-definition>
+
+	<filter-definition name="MuLawRtpSink" class="MuLawRtpSinkFilter" type="sink">
+		<input frequency="8000" sampleSize="1" encoding="mulaw"/>
+	</filter-definition>	
+	
+	<filter-definition name="MuLawRtpSource" class="MuLawRtpSourceFilter" type="source">
+		<output frequency="8000" sampleSize="1" encoding="mulaw"/>
+	</filter-definition>
+
+	<filter-definition name="PcmWavFileSource" class="WavFileSource" type="source">
+		<output frequency="8000" sampleSize="2" encoding="pcm"/>
+	</filter-definition>
+-->
+
+	<filter-definition name="MuLawWavFileSource" class="MuLawWavFileSourceFilter" type="source">
+		<output frequency="8000" sampleSize="1" encoding="ulaw"/>
+	</filter-definition>	
+
+	<filter-definition name="SpeakerSink" class="SpeakerSinkFilter" type="sink">
+		<input frequency="8000" sampleSize="2" encoding="pcm"/>
+	</filter-definition>
+</filter-definitions>
